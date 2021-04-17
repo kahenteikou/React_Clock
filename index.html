@@ -48,6 +48,13 @@
                         date:new Date().toLocaleDateString()
                     };
                 }
+                componentDidMount(){
+                    setInterval( () => {
+                        this.setState({
+                            date:new Date().toLocaleDateString(),
+                        })
+                    },1000)
+                }
                 render(){
                     return(
                         <div className="DayObject">

@@ -1,0 +1,97 @@
+<html>
+    <head>
+        <title>React Clock</title>
+        <!-- React Library -->
+        <script 
+            src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"
+            integrity="sha384-7Er69WnAl0+tY5MWEvnQzWHeDFjgHSnlQfDDeWUvv8qlRXtzaF/pNo18Q2aoZNiO"
+            crossorigin
+        ></script>
+        <script
+            src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"
+            integrity="sha384-vj2XpC1SOa8PHrb0YlBqKN7CQzJYO72jz4CkDQ+ePL1pwOV4+dn05rPrbLGUuvCv"
+            crossorigin
+        ></script>
+        <script
+            src="https://unpkg.com/@babel/standalone@7.13.13/babel.min.js"
+            integrity="sha384-5a7c5/GkaCITOh374LENmvBVmw8ts0nszrwqZcCTAhsLvTruncpgJvabCBiaxolO"
+            crossorigin
+        ></script>
+        <style>
+            body{
+                background-color: black;
+            }
+            .MainPage{
+                color:white;
+            }
+            .DayObject{
+                font-size: 15vw;
+                margin-left: auto;
+                text-align: center;
+                margin-right: auto;
+            }
+            .ClockObject{
+                font-size:12vw;
+                margin-left: auto;
+                text-align: center;
+                margin-right: auto;
+            }
+        </style>
+    </head>    
+    <body>
+        <div id="app"></div>
+        <script type="text/babel">
+            class DayObject extends React.Component{
+                constructor(props){
+                    super(props);
+                    this.state={
+                        date:new Date().toLocaleDateString()
+                    };
+                }
+                render(){
+                    return(
+                        <div className="DayObject">
+                            {this.state.date}
+                        </div>
+                    );
+                }
+            }
+            class ClockObject extends React.Component{
+                constructor(props){
+                    super(props);
+                    this.state={
+                        time:new Date().toLocaleTimeString()
+                    };
+                }
+                componentDidMount(){
+                    setInterval( () => {
+                        this.setState({
+                            time:new Date().toLocaleTimeString(),
+                        })
+                    },1000)
+                }
+                render(){
+                    return(
+                        <div className="ClockObject">
+                            {this.state.time}
+                        </div>
+                    );
+                }
+            }
+            class MainPage extends React.Component{
+                render(){
+                    return(
+                        <div className="MainPage">
+                            <DayObject />
+                            <ClockObject />
+                        </div>
+                    );
+                }
+            };
+            ReactDOM.render(
+                <MainPage />,
+                document.getElementById('app')
+            )
+        </script>
+    </body>
+</html>
